@@ -1,17 +1,22 @@
 package pl.nobleprog.advanced.day2.c3strings;
 
-import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Demo {
     public static void main(String[] args) {
-        // StringBuilder class
+        // StringBuilder class  - don't use as shared object in multithreaded code!
 
-        // StringBuffer class
+        // StringBuffer class - safe concurrency class
 
         measureTime("StringBuilder", () -> joinByStringBuilder());
+
+        // join method in String class
+
         measureTime("Join method", () -> joinByJoinMethod());
+
+        // StringJoiner class
+
         measureTime("StringJoiner", () -> joinByStringJoiner());
     }
 

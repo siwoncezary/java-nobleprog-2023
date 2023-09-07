@@ -1,5 +1,6 @@
 package pl.nobleprog.advanced.day4.c2reflection;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -12,12 +13,14 @@ public class Demo {
         // Class class
 
         // instantiate objects by reflection
-
-        // scanning object by reflection
-
         Foo foo = createObjectByReflection(Foo.class,"bar");
-        System.out.println(foo.bar);
+        System.out.println("Value of 'bar' field: " + foo.bar);
+
+        // calling method by reflection
         invokeMethod(foo,"print", "Hello");
+
+        // scanning object fields by reflection
+        readAllFields(foo);
     }
 
     public static <T> T createObjectByReflection(Class<T> clazz, String param) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
@@ -39,13 +42,21 @@ public class Demo {
         }
         m.invoke(obj, parameter);
     }
+
+    public static void readAllFields(Object obj){
+        System.out.println("Field list: ");
+        Field[] declaredFields = obj.getClass().getDeclaredFields();
+        Arrays.stream(declaredFields)
+                .map(Field::getName)
+                .forEach(System.out::println);
+    }
 }
 
 class Foo{
     public String bar;
-
+    // instance block
     {
-        System.setSecurityManager(new SecurityManager());
+        // System.setSecurityManager(new SecurityManager());
     }
     public Foo() {
 

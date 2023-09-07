@@ -10,8 +10,10 @@ public class Demo {
         // Matcher class
 
         // pattern matching
+        groupFind();
 
         // group extraction
+        // groupReplacement();
     }
 
     public static void patternMatches(){
@@ -24,7 +26,7 @@ public class Demo {
         Pattern pattern = Pattern.compile("\\d\\d");
         Matcher matcher = pattern.matcher("23 456 abcd");
         while(matcher.find()){
-            System.out.println("Wystąpienie wzorca!");
+            System.out.println("Wystąpienie wzorca - dwie kolejne cyfry!");
             System.out.println(matcher.group());
             System.out.println(matcher.groupCount());
         }
@@ -35,12 +37,12 @@ public class Demo {
         Matcher matcher = pattern.matcher("23-456 abcd psdjs osdfj odifj . sd8 990 sd0 78 987 45-998");
         StringBuilder sb = new StringBuilder();
         while(matcher.find()){
-            System.out.println("Wystąpienie wzorca!");
-            System.out.println(matcher.group("two"));
-            System.out.println(matcher.group("three"));
-            System.out.println(matcher.groupCount());
-            System.out.println(matcher.end());
-            matcher.appendReplacement(sb, "kod pocztowy");
+            System.out.println("Wystąpienie wzorca kodu pocztowego!");
+            System.out.println("Pierwsza grupa kodu: " + matcher.group("two"));
+            System.out.println("Druga grupa kodu: " + matcher.group("three"));
+            System.out.println("Liczba brup wzorca: " + matcher.groupCount());
+            System.out.println("Pozycja znaku za wzorcem: " + matcher.end());
+            matcher.appendReplacement(sb, "<kod pocztowy>");
         }
         matcher.appendTail(sb);
         System.out.println(sb);
@@ -52,8 +54,7 @@ public class Demo {
         Matcher matcher = pattern.matcher(input);
         StringBuilder sb = new StringBuilder();
         while(matcher.find()){
-            matcher.replaceAll("kod pocztowy");
+            System.out.println("Input after replacement: " + matcher.replaceAll("<kod pocztowy>"));
         }
-        System.out.println(input);
     }
 }

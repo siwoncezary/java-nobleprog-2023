@@ -22,13 +22,14 @@ public class SimpleChatServer {
                         Writer writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
                         Scanner scanner = new Scanner(new InputStreamReader(clientSocket.getInputStream()))
                         ){
+                    String address = clientSocket.getInetAddress().toString();
                     writer.write("Hello");
                     writer.flush();
                     String line = "";
-                    while((line = scanner.nextLine()) != null){
-                        System.out.printf("Message from client: %s\n", line);
+                    while(scanner.hasNext()){
+                        System.out.printf("Message from client: %s\n", scanner.next());
                     }
-                    System.out.printf("Client from % disconnected from server!", clientSocket.getInetAddress().toString());
+                    System.out.printf("Client from %s disconnected from server!", address);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

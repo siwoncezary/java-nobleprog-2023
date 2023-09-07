@@ -13,7 +13,7 @@ Zdefiniuj własną implementację (np. `HistoryArray`) tego interfejsu, aby moż
         System.out.println(item);
     }
 ```
-Efektem wykonania jest wyświetlenie `n` (w przykładzie dwóch) ostatnich wpisów historii w kolejności od najnowszego do najstarszego wpisu:
+Efektem wykonania jest wyświetlenie `n` ostatnich wpisów historii w kolejności od najnowszego do najstarszego wpisu:
 ```text
 ===
 123

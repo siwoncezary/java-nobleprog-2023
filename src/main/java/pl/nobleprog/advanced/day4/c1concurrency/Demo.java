@@ -131,7 +131,7 @@ class Counter {
     }
 }
 
-class SynchrinozedCounter {
+class SynchronizedCounter {
     private long value;
 
     public synchronized void inc() {
