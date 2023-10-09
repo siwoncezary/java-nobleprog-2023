@@ -39,6 +39,6 @@ public class TaskTest {
             System.out.println("Metoda `last` zwraca niepoprawne wpisy!");
             return;
         }
-        System.out.println("Brawo, zadanie wykonane poprawnie!");
+        System.out.println("Test passed!");
     }
 }

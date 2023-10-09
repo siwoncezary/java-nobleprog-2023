@@ -1,5 +1,9 @@
 package pl.nobleprog.advanced.day2.c2boxed;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Demo {
     public static void main(String[] args) {
 
@@ -33,6 +37,37 @@ public class Demo {
 
         System.out.println(i1.doubleValue());
         System.out.println(i1.byteValue());
+
+        // pitfalls
+
+        // int values are pooled in range from -128 to 127
+        Integer obj1 = 45;
+        Integer obj2 = 45;
+
+        // operator `==` can compare boxed integer only in byte range
+        System.out.println(obj1 == obj2);           // true
+
+        // other values are not pooled, and can't be compared by '=='
+        // in this case we compare references
+        obj1 = 678;
+        obj2 = 678;
+
+        System.out.println(obj1 == obj2);           // false
+        // always use `equals`
+
+        System.out.println(obj1.equals(obj2));      // true
+        // or Objects.equals
+
+        System.out.println(Objects.equals(obj1, obj2));
+
+        // List of boxed integers and remove methods
+        List<Integer> intList = new ArrayList<>(List.of(1, 2, 3, 4));
+
+        System.out.println(intList.remove(1));              // remove by index or by value ?
+        System.out.println(intList);
+
+        System.out.println(intList.remove(Integer.valueOf(1))); // remove by value
+        System.out.println(intList);
 
     }
 }

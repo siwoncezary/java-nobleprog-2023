@@ -1,11 +1,12 @@
 package pl.nobleprog.advanced.day2.c1primitives;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 class Value{
-    int v;
+    final int v;
 
     public Value(int v) {
         this.v = v;
@@ -16,27 +17,38 @@ public class Demo {
     public static void main(String[] args) {
         // why use primitive types?
 
-        // simple memory model, simpler coding
+        //  - simple memory model, simpler coding
 
-        // better performance
+        // - better performance
 
-        // variables created on stack not heap
+        // - variables created on stack not heap
 
-        // cant be null
+        // - cant be null
+
+        // performance examples
         int size = 1_000_000;
         long time = System.nanoTime();
-        sumOfObjects(IntStream.range(0, size).mapToObj(Value::new).toList());
-        System.out.printf("Time of summing objects:    %10.2f ms\n", (System.nanoTime() - time)/1000_000.0);
+
+        // sum of boxed int
+        sumOfObjects(IntStream.range(0, size).mapToObj(Integer::valueOf).toList());
+        System.out.printf("%-32s %10.2f ms\n","Time of summing objects:" ,(System.nanoTime() - time)/1000_000.0);
+
+        //sum of primitives
         time = System.nanoTime();
         sumOfPrimitives(IntStream.range(0, size).toArray());
-        System.out.printf("Time of summing primitives: %10.2f ms", (System.nanoTime() - time)/1000_000.0);
+        System.out.printf("%-32s %10.2f ms\n", "Time of summing primitives:", (System.nanoTime() - time)/1000_000.0);
+
+        //sum of custom wrapper of int
+        time = System.nanoTime();
+        sumOfCustomWrapper(IntStream.range(0, size).mapToObj(Value::new).toList());
+        System.out.printf("%-32s %10.2f ms\n","Time of summing custom wrapper:", (System.nanoTime() - time)/1000_000.0);
     }
 
 
-    static public void sumOfObjects(List<Value> list){
-        int sum = 0;
-        for(Value v:list){
-            sum += v.v;
+    static public void sumOfObjects(List<Integer> list){
+        Integer sum = 0;
+        for(Integer v:list){
+            sum += v;
         }
     }
 
@@ -46,4 +58,12 @@ public class Demo {
             sum += arr[i];
         }
     }
+
+    static  public void sumOfCustomWrapper(List<Value> list){
+        int sum = 0;
+        for(Value v:list){
+            sum += v.v;
+        }
+    }
+
 }

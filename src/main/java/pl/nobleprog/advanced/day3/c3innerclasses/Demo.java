@@ -9,7 +9,7 @@ public class Demo {
     private int status = 4;
 
     public static void main(String[] args) {
-        // main principle - class in Java is first citizen, may occur in all possible code places: file, class, method
+        // Java main principle - class in Java is first citizen, may occur in all possible code places: file, class, method
 
         // static inner classes - nested classes
 

@@ -1,6 +1,7 @@
 package pl.nobleprog.advanced.day2.c3strings;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.StringJoiner;
 
 public class Demo {
@@ -18,6 +19,43 @@ public class Demo {
         // StringJoiner class
 
         measureTime("StringJoiner", () -> joinByStringJoiner());
+
+        // string concatenation
+
+        measureTime("String concatenation (only 100 000)", () -> joinByConcatenation());
+
+        // selected String methods
+
+        System.out.println("#".repeat(5));
+        String str = "\uD83D\uDE01Łąka";
+        System.out.println(str);
+        System.out.println("Code point at 0: " + str.codePointAt(0));
+        System.out.println("Char at 0: " + str.charAt(0));
+        System.out.println("Char at 1: " + str.charAt(1));
+        System.out.println("Char at 2: " + str.charAt(2));
+        System.out.println("Byte array: " + Arrays.toString(str.getBytes()));
+        System.out.println("Intern: " + str.intern());
+
+        String escaped = "  \tABCD\n  EFGH\b\"\'".translateEscapes();
+        System.out.println("Original string:");
+        System.out.println(escaped);
+        System.out.println("Ident:");
+        System.out.println(escaped.indent(5));
+        System.out.println("StripLeading:");
+        System.out.println(escaped.stripLeading());
+        System.out.println("StripIdent:");
+        System.out.println(escaped.stripIndent());
+        System.out.println("Transform:");
+        System.out.println((String) escaped.transform(String::toLowerCase));
+
+        String format = "%20s %5.2f";
+        var data = new HashMap<String, Double>(){{
+            put("Lampa", 24.6788);
+            put("Stolik", 624.98978);
+            put("Fotel", 324.1234);
+            put("Sofa", 924.2318);
+        }};
+        data.forEach((key, value) -> System.out.println(format.formatted(key, value)));
     }
 
     public static void joinByStringBuilder(){
@@ -25,7 +63,6 @@ public class Demo {
         for(int i = 0; i < 1_000_000; i++){
             sb.append("A");
         }
-        System.out.println(sb.toString().length());
     }
 
     public static void joinByJoinMethod(){
@@ -33,7 +70,6 @@ public class Demo {
         Arrays.fill(arr, "A");
         String result = "";
         result = String.join("", arr);
-        System.out.println(result.length());
     }
 
     public static void joinByStringJoiner(){
@@ -41,7 +77,13 @@ public class Demo {
         for(int i = 0; i < 1_000_000; i++){
             joiner.add("A");
         }
-        System.out.println(joiner.toString().length());
+    }
+
+    public static void joinByConcatenation(){
+        String str = "";
+        for(int i = 0; i < 100_000; i++){
+            str += "A";
+        }
     }
 
     public static void measureTime(String message, Runnable task){

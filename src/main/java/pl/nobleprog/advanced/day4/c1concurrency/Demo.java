@@ -18,7 +18,7 @@ public class Demo {
 
         // SynchronizedQueue
 
-        synchronizedQueue();
+        threadLocalDemo();
     }
 
     public static void threadLocalDemo() {
@@ -28,18 +28,19 @@ public class Demo {
         service.execute(() -> {
             for (int i = 0; i < 5; i++) {
                 counter.set(5);
-                System.out.println("Task 1 " + Thread.currentThread().getId() + " " + counter.get());
+                System.out.println("Task 1 " + Thread.currentThread().getId() + " threadLocal: " + counter.get());
             }
         });
         service.execute(() -> {
             for (int i = 0; i < 5; i++) {
                 counter.set(20);
-                System.out.println("Task 2 " + Thread.currentThread().getId() + " " + counter.get());
+                System.out.println("Task 2 " + Thread.currentThread().getId() + " threadLocal: " + counter.get());
             }
         });
         service.execute(() -> {
+            counter.set(11);
             for (int i = 0; i < 5; i++) {
-                System.out.println("Task 3 " + Thread.currentThread().getId() + " " + counter.get());
+                System.out.println("Task 3 " + Thread.currentThread().getId() + " threadLocal: " + counter.get());
             }
         });
         service.shutdown();
