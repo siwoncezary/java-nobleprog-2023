@@ -22,5 +22,5 @@ np.
     from: adam@nobleprog.pl
     to: ewa@wp.pl
     subject: zajęcia
-    content: Kiedy się zaczynają
+    content: Kiedy się zaczynają?
 ```

@@ -30,7 +30,7 @@ public class Demo {
         long time = System.nanoTime();
 
         // sum of boxed int
-        sumOfObjects(IntStream.range(0, size).mapToObj(Integer::valueOf).toList());
+        sumOfObjects(IntStream.range(0, size).boxed().toList());
         System.out.printf("%-32s %10.2f ms\n","Time of summing objects:" ,(System.nanoTime() - time)/1000_000.0);
 
         //sum of primitives

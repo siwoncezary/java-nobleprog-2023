@@ -20,8 +20,6 @@ public class Demo {
         System.out.println(i1);
         System.out.println(Integer.compareUnsigned(12, -12));
         System.out.println(Integer.compare(12, -12));
-        System.out.println(Integer.toHexString(-12));
-        System.out.println(Integer.toHexString(12));
 
         // static methods
 
@@ -43,9 +41,12 @@ public class Demo {
         // int values are pooled in range from -128 to 127
         Integer obj1 = 45;
         Integer obj2 = 45;
+        Long    obj3 = 45L;
 
         // operator `==` can compare boxed integer only in byte range
+        System.out.println("Comparing boxed types");
         System.out.println(obj1 == obj2);           // true
+        System.out.println(obj3 == obj3);
 
         // other values are not pooled, and can't be compared by '=='
         // in this case we compare references
