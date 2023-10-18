@@ -14,6 +14,7 @@ public class StringTask {
      *
      */
     public static String joinWithIdent(String data){
-        return data.lines().map(line -> line.indent(5)).collect(Collectors.joining());
+
+        throw new RuntimeException("Not implemented");
     }
 }

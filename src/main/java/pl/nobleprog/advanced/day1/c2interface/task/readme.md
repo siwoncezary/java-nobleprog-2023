@@ -4,7 +4,7 @@ Zdefiniuj interfejs `History` z metodami:
 - `last` z parametrem typu `int` zwracająca tablicę łańcuchów
 Zdefiniuj własną implementację (np. `HistoryArray`) tego interfejsu, aby można było wykonać poniższy program:
 ```java
-    History history = new HistoryArray();
+    History history = new HistoryList();
     history.insert("abc");
     history.insert("123");
     history.insert("===");

@@ -6,55 +6,33 @@ import java.util.regex.Pattern;
 public class Demo {
     public static void main(String[] args) {
         // Patter class
-
+        Pattern pattern = Pattern.compile("\\d\\d");
         // Matcher class
-
+        Matcher matcher = pattern.matcher("askjdh 23-456 sdf sdf");
         // pattern matching
-        groupFind();
-
-        // group extraction
-        // groupReplacement();
-    }
-
-    public static void patternMatches(){
-        Pattern pattern = Pattern.compile("\\d\\d");
-        Matcher matcher = pattern.matcher("23 456 abcd");
-        System.out.println("Czy łańcuch pasuje do wzoru? " + matcher.matches());
-    }
-
-    public static void patternFind(){
-        Pattern pattern = Pattern.compile("\\d\\d");
-        Matcher matcher = pattern.matcher("23 456 abcd");
+        System.out.println("Czy lancuch pasuje do wzorca? " + matcher.matches());
         while(matcher.find()){
-            System.out.println("Wystąpienie wzorca - dwie kolejne cyfry!");
+            System.out.println("Znaleziono dwie cyfry");
             System.out.println(matcher.group());
-            System.out.println(matcher.groupCount());
         }
-    }
-
-    public static void groupFind(){
-        Pattern pattern = Pattern.compile("(?<two>\\d\\d)-(?<three>\\d{3})");
-        Matcher matcher = pattern.matcher("23-456 abcd psdjs osdfj odifj . sd8 990 sd0 78 987 45-998");
+        // group extraction
+        pattern = Pattern.compile("(?<two>\\d{2})-(?<three>\\d{3})");
+        matcher = pattern.matcher("Kod pocztowy 25-890 Warszawa; 45-789 Wrocław 78 567");
         StringBuilder sb = new StringBuilder();
         while(matcher.find()){
-            System.out.println("Wystąpienie wzorca kodu pocztowego!");
-            System.out.println("Pierwsza grupa kodu: " + matcher.group("two"));
-            System.out.println("Druga grupa kodu: " + matcher.group("three"));
-            System.out.println("Liczba brup wzorca: " + matcher.groupCount());
-            System.out.println("Pozycja znaku za wzorcem: " + matcher.end());
+            System.out.println(matcher.group("two") + "-" + matcher.group("three"));
+            System.out.println("Liczba grup: " + matcher.groupCount());
+            System.out.println("Pozycja znaku za wzorcem " + matcher.end());
             matcher.appendReplacement(sb, "<kod pocztowy>");
         }
         matcher.appendTail(sb);
         System.out.println(sb);
-    }
-
-    public static void groupReplacement(){
-        Pattern pattern = Pattern.compile("(?<two>\\d\\d)-(?<three>\\d{3})");
-        String input = "23-456 abcd psdjs osdfj odifj . sd8 990 sd0 78 987 45-998 dasd 6 1890.";
-        Matcher matcher = pattern.matcher(input);
-        StringBuilder sb = new StringBuilder();
-        while(matcher.find()){
-            System.out.println("Input after replacement: " + matcher.replaceAll("<kod pocztowy>"));
+        // groupReplacement();
+        System.out.println("Group replacement");
+        matcher = pattern.matcher("Kod pocztowy 25-890 Warszawa; 45-789 Wrocław 78 567");
+        if(matcher.find()){
+            var str = matcher.replaceAll("<kod pocztowy>");
+            System.out.println(str);
         }
     }
 }

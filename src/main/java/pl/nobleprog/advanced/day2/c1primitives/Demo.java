@@ -17,7 +17,7 @@ public class Demo {
     public static void main(String[] args) {
         // why use primitive types?
 
-        //  - simple memory model, simpler coding
+        // - simple memory model, simpler coding
 
         // - better performance
 
@@ -30,7 +30,7 @@ public class Demo {
         long time = System.nanoTime();
 
         // sum of boxed int
-        sumOfObjects(IntStream.range(0, size).mapToObj(Integer::valueOf).toList());
+        sumOfObjects(IntStream.range(0, size).boxed().toArray(Integer[]::new));
         System.out.printf("%-32s %10.2f ms\n","Time of summing objects:" ,(System.nanoTime() - time)/1000_000.0);
 
         //sum of primitives
@@ -38,14 +38,26 @@ public class Demo {
         sumOfPrimitives(IntStream.range(0, size).toArray());
         System.out.printf("%-32s %10.2f ms\n", "Time of summing primitives:", (System.nanoTime() - time)/1000_000.0);
 
-        //sum of custom wrapper of int
+        //sum of custom int wrapper
         time = System.nanoTime();
         sumOfCustomWrapper(IntStream.range(0, size).mapToObj(Value::new).toList());
         System.out.printf("%-32s %10.2f ms\n","Time of summing custom wrapper:", (System.nanoTime() - time)/1000_000.0);
+
+        System.out.println(f1() == f2());
+        // \u000d System.out.println("Hello");
+        byte a = 010;
+        int hex = 0xFF00;
+        int bin = 0b1_10_01;
+    }
+    public static double f1(){
+        return 0 / 0.0;
     }
 
+    public static double f2(){
+        return 0 / 0.0;
+    }
 
-    static public void sumOfObjects(List<Integer> list){
+    static public void sumOfObjects(Integer[] list){
         Integer sum = 0;
         for(Integer v:list){
             sum += v;

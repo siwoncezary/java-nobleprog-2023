@@ -3,6 +3,7 @@ package pl.nobleprog.advanced.day2.c4regexp.task;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,14 +33,14 @@ public class PatternTask {
      */
 
     public static List<String> extractTable(String html){
-        //throw new RuntimeException("Not implemented!");
-        List<String> result = new ArrayList<>();
-        Pattern pattern = Pattern.compile("<a\\s+href=[\"'](?<url>.*?)[\"']>(?<name>.*?)</a>");
+        Pattern pattern = Pattern.compile("href=(?<link>[^>]*)");
+        // Matcher class
+        List<String> r = new ArrayList<>();
         Matcher matcher = pattern.matcher(html);
         while(matcher.find()){
-            String url = matcher.group("url");
-            result.add(url);
+            String link = matcher.group("link").replace("\"","").replace("'","");
+            r.add(link);
         }
-        return result;
+        return r;
     }
 }

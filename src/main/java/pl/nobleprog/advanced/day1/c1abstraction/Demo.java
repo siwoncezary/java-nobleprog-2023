@@ -9,6 +9,9 @@ public class Demo {
         // implementation of abstract method
 
         // abstract class inheritance
+
+        Product laptop = new Laptop("Asus", 120000, 16, "i7");
+        System.out.println(laptop.info());
     }
 
 }

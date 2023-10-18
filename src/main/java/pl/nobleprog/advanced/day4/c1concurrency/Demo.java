@@ -11,14 +11,16 @@ public class Demo {
         // schedulers
 
         // ThreadLocal class
-
+        threadLocalDemo();
         // CyclicBarier class
 
         // ReentrantLock
 
         // SynchronizedQueue
 
-        threadLocalDemo();
+        // threadLocalDemo();
+
+        // synchronizedQueue();
     }
 
     public static void threadLocalDemo() {

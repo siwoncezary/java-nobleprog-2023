@@ -8,66 +8,55 @@ public class Demo {
     public static void main(String[] args) {
 
         // boxing primitive types
-
-        Integer i1 = 12;
-        Integer i2 = Integer.valueOf(12);
-        System.out.println(i1 == i2);
-        int i3 = 12;
-        System.out.println(i1 == i3);
-
+        Integer a = 450;
+        Integer b = Integer.valueOf(450);
+        int c = 50;
+        Double f = 56.09;
+        Boolean h = true;
         // unboxing primitive types
-
-        System.out.println(i1);
-        System.out.println(Integer.compareUnsigned(12, -12));
-        System.out.println(Integer.compare(12, -12));
-        System.out.println(Integer.toHexString(-12));
-        System.out.println(Integer.toHexString(12));
-
+        System.out.println(c == a);
+        System.out.println(c == a.intValue());
         // static methods
-
-        int a = Integer.parseInt("23");
+        System.out.println(Integer.compare(34, a));
         System.out.println(Integer.toHexString(a));
-        System.out.println(Integer.toBinaryString(a));
-        System.out.println(Integer.toOctalString(a));
-        System.out.println(Integer.bitCount(a));
         System.out.println(Integer.decode("0x17"));
-        System.out.println(Integer.reverse(a));
-
+        System.out.println(Integer.toBinaryString(Integer.reverse(a)));
         // instance method
-
-        System.out.println(i1.doubleValue());
-        System.out.println(i1.byteValue());
-
+        System.out.println(a.doubleValue());
         // pitfalls
 
         // int values are pooled in range from -128 to 127
-        Integer obj1 = 45;
-        Integer obj2 = 45;
+        System.out.println(a == b);                 // porownanie referencji
 
         // operator `==` can compare boxed integer only in byte range
-        System.out.println(obj1 == obj2);           // true
 
         // other values are not pooled, and can't be compared by '=='
         // in this case we compare references
-        obj1 = 678;
-        obj2 = 678;
 
-        System.out.println(obj1 == obj2);           // false
         // always use `equals`
-
-        System.out.println(obj1.equals(obj2));      // true
         // or Objects.equals
-
-        System.out.println(Objects.equals(obj1, obj2));
-
+        System.out.println(a.equals(b));            // moze byc NPE
+        System.out.println(Objects.equals(a, b));   // bez NPE
         // List of boxed integers and remove methods
-        List<Integer> intList = new ArrayList<>(List.of(1, 2, 3, 4));
+        List<Integer> ints = new ArrayList<>();
+        ints.add(1);
+        ints.add(5);
+        //ints.remove(0);
+        ints.remove(a);
+        System.out.println(ints);
+        int l = 5;
+        int k = 6;
+        Long result = calc(null, k);
+        System.out.println(result);
 
-        System.out.println(intList.remove(1));              // remove by index or by value ?
-        System.out.println(intList);
 
-        System.out.println(intList.remove(Integer.valueOf(1))); // remove by value
-        System.out.println(intList);
+    }
 
+    public static Long calc(Integer a, int b){
+        if (a != null) {
+            return Long.valueOf(a * b);
+        } else {
+            return null;
+        }
     }
 }

@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Task {
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Object history = new ArrayHistory();
+        Object history = new ArrayHistory(); // zmien na wlasna implementację
         TaskTest.test(history);
     }
 }

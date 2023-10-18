@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Electronics {
-    LAPTOP((price, name) -> new Laptop(price, name)),
-    MOBILE((price, name) -> new MobilePhone(price, name));
+    LAPTOP(Laptop::new),
+    MOBILE(MobilePhone::new);
 
     private BiFunction<BigDecimal, String, Product> producer;
 
