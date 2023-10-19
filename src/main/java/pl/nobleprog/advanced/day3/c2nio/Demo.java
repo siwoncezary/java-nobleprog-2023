@@ -1,7 +1,11 @@
 package pl.nobleprog.advanced.day3.c2nio;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.*;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -52,6 +56,29 @@ public class Demo {
         } catch (NoSuchFileException e){
             System.out.println("Brak pliku do usuniecia!");
         }
+
+        channelDemo();
+    }
+
+    public static void channelDemo() throws IOException {
+        // DatagramChannel
+        // SocketChannel
+        // ServerSocketChannel
+        RandomAccessFile aFile = new RandomAccessFile("demo.txt", "rw");
+        FileChannel channel = aFile.getChannel();
+        ByteBuffer buffer = ByteBuffer.allocate(128);
+        int bytesRead = 0;
+        while((bytesRead = channel.read(buffer)) != -1){
+            System.out.println("Read " + bytesRead);
+            buffer.flip();
+            while(buffer.hasRemaining()){
+                System.out.println((char)buffer.get());
+            }
+            buffer.clear();
+        }
+        byte[] bytesWrite = "END OF FILE".getBytes();
+        int written = channel.write(ByteBuffer.wrap(bytesWrite));
+        aFile.close();
     }
 
     public static void saveToWriter(BufferedWriter writer){
