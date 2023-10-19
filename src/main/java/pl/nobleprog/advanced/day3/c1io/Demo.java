@@ -14,12 +14,42 @@ public class Demo {
         // abstract character streams: Reader, Writer
 
         // character stream decorators: BufferedReader, BufferedWriter
-        System.out.println(Reader(22));
+        // System.out.println(Reader(22));
+        // fileWriter();
         // concrete character streams: FileReader, FileWriter
+
+        // PrintWriter
+        printWriter();
+    }
+
+    public static void printWriter(){
+        try(
+                BufferedWriter writer = new BufferedWriter(new FileWriter("./out.txt"), 1024);
+                PrintWriter printWriter = new PrintWriter(writer);
+        ){
+            printWriter.write("Line 1");
+            printWriter.println(61);
+            char[] buff = { 'a', 'b', 'c', 'd'};
+            printWriter.write(buff);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void fileWriter(){
+        try(
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./out.txt"), 1024);
+            ){
+            writer.write("Line 1");
+            writer.write(61);
+            char[] buff = { 'a', 'b', 'c', 'd'};
+            writer.write(buff);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static int Reader(int rowNumber){
-
         try (
                 Reader in = new FileReader("./ex1.txt");
                 BufferedReader reader = new BufferedReader(in);
@@ -36,7 +66,6 @@ public class Demo {
                     }
 
                 } catch (NumberFormatException e){
-
                 }
                 counter++;
             }
